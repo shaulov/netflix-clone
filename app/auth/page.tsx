@@ -63,7 +63,7 @@ function Auth () {
             </form>
             <p className="mt-12 text-sm text-neutral-500">
               {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
-              <a className="ml-1 text-white cursor-pointer hover:underline" onClick={toggleVariant}>
+              <a className="ml-1 text-white cursor-pointer hover:underline" onClick={toggleVariant} href="#">
                 {variant === 'login' ? 'Create and account' : 'Login'}
               </a>
             </p>
