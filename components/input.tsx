@@ -4,9 +4,10 @@ interface InputProps {
   value: string;
   label: string;
   type?: string;
+  autoComplete?: string;
 }
 
-function Input ({id, onChange, value, label, type}: InputProps) {
+function Input ({id, onChange, value, label, type, autoComplete}: InputProps) {
   return (
     <div className="relative">
       <input 
@@ -27,6 +28,7 @@ function Input ({id, onChange, value, label, type}: InputProps) {
         onChange={onChange}
         value={value}
         placeholder=" "
+        autoComplete={autoComplete}
       />
       <label 
         className="
