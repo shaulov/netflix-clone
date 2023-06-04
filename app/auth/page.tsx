@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { useState, useCallback, ChangeEvent, MouseEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
@@ -11,6 +11,7 @@ import { FaGithub } from 'react-icons/fa';
 
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type formSubmit = FormEvent<HTMLFormElement>;
+type clickEvent = MouseEvent<HTMLButtonElement>;
 
 function Auth () {
   const router = useRouter();
@@ -62,6 +63,11 @@ function Auth () {
     variant === 'login' ? login() : register();
   }
 
+  const handleOAuthButtonClick = (evt: clickEvent) => {
+    // TODO: finish handler
+    // () => signIn(name, {callbackUrl: '/'});
+  }
+
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className="w-full h-full bg-black lg:bg-opacity-50">
@@ -109,28 +115,30 @@ function Auth () {
               </button>
             </form>
             <div className='flex flex-row items-center justify-center gap-4 mt-8'>
-              <a 
+              <button
                 className='
                   flex items-center justify-center 
                   w-10 h-10 
                   bg-white rounded-full 
                   transition hover:opacity-80
-                ' 
-                href="#"
+                '
+                name="google"
+                onClick={() => signIn('google', {callbackUrl: '/'})}
               >
                 <FcGoogle size={30} />
-              </a>
-              <a 
+              </button>
+              <button 
                 className='
                   flex items-center justify-center 
                   w-10 h-10 
                   bg-white rounded-full 
                   transition hover:opacity-80
-                ' 
-                href="#"
+                '
+                name="github"
+                onClick={() => signIn('github', {callbackUrl: '/'})}
               >
                 <FaGithub className='fill-black' size={30} />
-              </a>
+              </button>
             </div>
             <p className="mt-12 text-sm text-neutral-500">
               {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
