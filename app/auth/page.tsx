@@ -1,9 +1,11 @@
 'use client';
 
-import { useState, ChangeEvent, useCallback } from "react";
+import { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import axios from "axios";
 import Input from "@/components/input";
 
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+type formSubmit = FormEvent<HTMLFormElement>;
 
 function Auth () {
   const [userData, setData] = useState({
@@ -17,10 +19,23 @@ function Auth () {
     setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
   }, []);
 
+  const register = useCallback((async () => {
+    try {
+      await axios.post('/api/auth/register', {...userData});
+    } catch (error) {
+      console.error(error);
+    }
+  }), [userData]);
+
   const handleChange = (evt: changeEvent) => {
     const {name, value} = evt.target;
     console.log();
     setData({...userData, [name]: value}); 
+  }
+
+  const handleFromSubmit = (evt: formSubmit) => {
+    evt.preventDefault();
+    register();
   }
 
   return (
@@ -34,13 +49,17 @@ function Auth () {
             <h2 className="mb-8 text-white text-4xl font-semibold">
               {variant === 'login' ? 'Sign In' : 'Register'}
             </h2>
-            <form className="flex flex-col gap-4">
+            <form 
+              className="flex flex-col gap-4"
+              onSubmit={handleFromSubmit}
+            >
               {variant === 'register' && 
                 <Input
                   id="name"
                   onChange={handleChange}
                   value={userData.name}
                   label="Username"
+                  autoComplete="username"
                 />
               }
               <Input
@@ -49,6 +68,7 @@ function Auth () {
                 value={userData.email}
                 label="Email"
                 type="email"
+                autoComplete="email"
               />
               <Input
                 id="password"
@@ -56,8 +76,11 @@ function Auth () {
                 value={userData.password}
                 label="Password"
                 type="password"
+                autoComplete="current-password"
               />
-              <button className="w-full mt-6 py-3 text-white bg-red-600 rounded-md hover:bg-red-700 transition">
+              <button 
+                className="w-full mt-6 py-3 text-white bg-red-600 rounded-md hover:bg-red-700 transition"
+              >
                 {variant === 'login' ? 'Login' : 'Sign up'}
               </button>
             </form>
