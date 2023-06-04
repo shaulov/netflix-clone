@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useCallback, ChangeEvent, FormEvent } from "react";
-import axios from "axios";
-import Input from "@/components/input";
+import { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { signIn } from 'next-auth/react';
+import axios from 'axios';
+import Input from '@/components/input';
 
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type formSubmit = FormEvent<HTMLFormElement>;
@@ -21,11 +22,24 @@ function Auth () {
 
   const register = useCallback((async () => {
     try {
-      await axios.post('/api/auth/register', {...userData});
+      await axios.post('/api/auth/register', userData);
     } catch (error) {
       console.error(error);
     }
   }), [userData]);
+
+  const login = useCallback(async () => {
+    try {
+      await signIn('credentials', {
+        email: userData.email,
+        password: userData.password,
+        redirect: false,
+        callbackUrl: '/',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [userData.email, userData.password]);
 
   const handleChange = (evt: changeEvent) => {
     const {name, value} = evt.target;
@@ -35,7 +49,7 @@ function Auth () {
 
   const handleFromSubmit = (evt: formSubmit) => {
     evt.preventDefault();
-    register();
+    variant === 'login' ? login() : register();
   }
 
   return (
