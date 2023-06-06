@@ -6,6 +6,7 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prismadb from '@/lib/prisma-db'; 
+import { AppRoute } from '@/const';
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -59,7 +60,7 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: '/auth',
+    signIn: AppRoute.Auth,
   },
   debug: process.env.NODE_ENV === 'development',
   adapter: PrismaAdapter(prismadb),

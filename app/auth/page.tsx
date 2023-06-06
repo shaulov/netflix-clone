@@ -4,10 +4,11 @@ import { useState, useCallback, ChangeEvent, MouseEvent, FormEvent } from 'react
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-import Input from '@/components/input';
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import Input from '@/components/input';
+import { AppRoute, ApiRoute, OAuthMetod } from '@/const';
 
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type formSubmit = FormEvent<HTMLFormElement>;
@@ -33,10 +34,10 @@ function Auth () {
         email: userData.email,
         password: userData.password,
         redirect: false,
-        callbackUrl: '/',
+        callbackUrl: AppRoute.Root,
       });
 
-      router.push('/');
+      router.push(AppRoute.Root);
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +45,7 @@ function Auth () {
 
   const register = useCallback((async () => {
     try {
-      await axios.post('/api/auth/register', userData);
+      await axios.post(ApiRoute.Register, userData);
 
       login();
     } catch (error) {
@@ -122,8 +123,8 @@ function Auth () {
                   bg-white rounded-full 
                   transition hover:opacity-80
                 '
-                name="google"
-                onClick={() => signIn('google', {callbackUrl: '/'})}
+                name={OAuthMetod.Google}
+                onClick={() => signIn(OAuthMetod.Google, {callbackUrl: AppRoute.Root})}
               >
                 <FcGoogle size={30} />
               </button>
@@ -134,8 +135,8 @@ function Auth () {
                   bg-white rounded-full 
                   transition hover:opacity-80
                 '
-                name="github"
-                onClick={() => signIn('github', {callbackUrl: '/'})}
+                name={OAuthMetod.Github}
+                onClick={() => signIn(OAuthMetod.Github, {callbackUrl: AppRoute.Root})}
               >
                 <FaGithub className='fill-black' size={30} />
               </button>
