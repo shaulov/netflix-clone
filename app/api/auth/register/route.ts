@@ -1,11 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import prismadb from '@/lib/prisma-db';
 
-export async function POST(
-  request: Request
-) {
+export async function POST(request: Request) {
   try {
     if (request.method !== 'POST') {
       return new NextResponse('Method Not Allowed', { status: 405 });
