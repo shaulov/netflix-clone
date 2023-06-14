@@ -8,7 +8,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import Input from '@/components/input';
-import { AppRoute, ApiRoute, OAuthMetod } from '@/const';
+import { AppRoute, ApiRoute, OAuthMetod, AuthStatus } from '@/const';
 
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type formSubmit = FormEvent<HTMLFormElement>;
@@ -27,7 +27,7 @@ function Auth () {
   const [variant, setVariant] = useState<variant>('login')
 
   useEffect(() => {
-    if (session?.status === 'authenticated') {
+    if (session?.status === AuthStatus.AUTH) {
       router.push(AppRoute.Root);
     }
   }, [session?.status, router]);
