@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useCallback, ChangeEvent, MouseEvent, FormEvent } from 'react';
+import { useState, useCallback, ChangeEvent, MouseEvent, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import Input from '@/components/input';
@@ -13,8 +13,10 @@ import { AppRoute, ApiRoute, OAuthMetod } from '@/const';
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type formSubmit = FormEvent<HTMLFormElement>;
 type clickEvent = MouseEvent<HTMLButtonElement>;
+type variant = 'login' | 'register';
 
 function Auth () {
+  const session = useSession();
   const router = useRouter();
 
   const [userData, setData] = useState({
@@ -22,7 +24,13 @@ function Auth () {
     email: '',
     password: '',
   });
-  const [variant, setVariant] = useState('login')
+  const [variant, setVariant] = useState<variant>('login')
+
+  useEffect(() => {
+    if (session?.status === 'authenticated') {
+      router.push(AppRoute.Root);
+    }
+  }, [session?.status, router]);
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
