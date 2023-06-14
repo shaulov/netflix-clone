@@ -4,7 +4,7 @@ export enum AppRoute {
 }
 
 export enum ApiRoute {
-  Register = '/api/auth/register',
+  Register = '/api/register',
   Current = '/api/current',
 }
 
