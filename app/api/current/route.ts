@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from 'next/server';
 import serverAuth from '@/lib/server-auth';
 
-export async function GET(request: NextApiRequest, response: NextApiResponse) {
+export default async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
     if (request.method !== 'GET') {
       return new NextResponse('Method Not Allowed', { status: 405 });
