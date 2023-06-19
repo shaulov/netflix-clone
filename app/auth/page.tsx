@@ -41,11 +41,8 @@ function Auth () {
       await signIn('credentials', {
         email: userData.email,
         password: userData.password,
-        redirect: false,
-        callbackUrl: AppRoute.Root,
+        callbackUrl: AppRoute.Profiles,
       });
-
-      router.push(AppRoute.Root);
     } catch (error) {
       console.error(error);
     }
@@ -132,7 +129,7 @@ function Auth () {
                   transition hover:opacity-80
                 '
                 name={OAuthMetod.Google}
-                onClick={() => signIn(OAuthMetod.Google, {callbackUrl: AppRoute.Root})}
+                onClick={() => signIn(OAuthMetod.Google, {callbackUrl: AppRoute.Profiles})}
               >
                 <FcGoogle size={30} />
               </button>
@@ -144,7 +141,7 @@ function Auth () {
                   transition hover:opacity-80
                 '
                 name={OAuthMetod.Github}
-                onClick={() => signIn(OAuthMetod.Github, {callbackUrl: AppRoute.Root})}
+                onClick={() => signIn(OAuthMetod.Github, {callbackUrl: AppRoute.Profiles})}
               >
                 <FaGithub className='fill-black' size={30} />
               </button>

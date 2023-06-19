@@ -1,6 +1,7 @@
 export enum AppRoute {
   Root = '/',
   Auth = '/auth',
+  Profiles = '/profiles',
 }
 
 export enum ApiRoute {
