@@ -7,6 +7,7 @@ export enum AppRoute {
 export enum ApiRoute {
   Register = '/api/register',
   Current = '/api/current',
+  Random = '/api/random',
 }
 
 export enum OAuthMetod {
