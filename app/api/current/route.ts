@@ -1,14 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 import { NextResponse } from 'next/server';
 import serverAuth from '@/lib/server-auth';
 
-export default async function GET(request: NextApiRequest, response: NextApiResponse) {
+export async function GET(request: NextApiRequest) {
   try {
     if (request.method !== 'GET') {
       return new NextResponse('Method Not Allowed', { status: 405 });
     }
 
-    const { currentUser } = await serverAuth(request, response);
+    const currentUser = await serverAuth();
 
     return NextResponse.json(currentUser);
   } catch (error) {
