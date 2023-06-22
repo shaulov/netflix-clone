@@ -19,3 +19,5 @@ export enum AuthStatus {
   NoAUTH = 'unauthenticated',
   Loading = 'loading',
 }
+
+export const TOP_OFFSET = 66;
