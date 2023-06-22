@@ -5,11 +5,14 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
+import useCurrentUser from '@/hooks/use-current-user';
 import { AppRoute, AuthStatus } from '@/const';
 
 function Profiles () {
   const session = useSession();
   const router = useRouter();
+
+  const { data: user } = useCurrentUser();
 
   useEffect(() => {
     if (session?.status === AuthStatus.NoAUTH) {
@@ -38,7 +41,7 @@ function Profiles () {
                 " 
                 href={AppRoute.Root}
               >
-                {session?.data?.user?.name}
+                {user?.name}
               </Link>
               <Image 
                 className="
