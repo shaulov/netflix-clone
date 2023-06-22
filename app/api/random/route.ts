@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import prismadb from '@/lib/prisma-db';
 import serverAuth from '@/lib/server-auth';
 
-export default async function GET(request: Request) {
+export async function GET(request: Request) {
   if (request.method !== 'GET') {
     return new NextResponse('Method not allow', { status: 405 });
   }

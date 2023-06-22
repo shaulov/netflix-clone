@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { AppRoute, AuthStatus } from '@/const';
 import Navbar from '@/components/navbar';
+import Billboard from '@/components/billboard';
 
 export default function Home() {
   const session = useSession();
@@ -24,6 +25,7 @@ export default function Home() {
     return (
       <>
         <Navbar />
+        <Billboard />
       </>
     );
   }
