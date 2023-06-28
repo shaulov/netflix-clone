@@ -3,13 +3,17 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import useMovieList from '@/hooks/use-movie-list';
 import { AppRoute, AuthStatus } from '@/const';
 import Navbar from '@/components/navbar';
 import Billboard from '@/components/billboard';
+import MovieList from '@/components/movie-list';
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
+
+  const { data: movies = [] } = useMovieList();
 
   useEffect(() => {
     if (session?.status === AuthStatus.NoAUTH) {
@@ -26,6 +30,9 @@ export default function Home() {
       <>
         <Navbar />
         <Billboard />
+        <div className="pb-40">
+          <MovieList title="Trending Now" data={movies} />
+        </div>
       </>
     );
   }

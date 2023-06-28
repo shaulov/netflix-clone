@@ -8,6 +8,7 @@ export enum ApiRoute {
   Register = '/api/register',
   Current = '/api/current',
   Random = '/api/random',
+  MovieList = '/api/movies',
 }
 
 export enum OAuthMetod {
