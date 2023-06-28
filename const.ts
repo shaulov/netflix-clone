@@ -9,6 +9,7 @@ export enum ApiRoute {
   Current = '/api/current',
   Random = '/api/random',
   MovieList = '/api/movies',
+  Favorites = '/api/favorites',
 }
 
 export enum OAuthMetod {
