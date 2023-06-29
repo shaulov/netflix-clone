@@ -9,6 +9,7 @@ export enum ApiRoute {
   Current = '/api/current',
   Random = '/api/random',
   MovieList = '/api/movies',
+  Favorite = '/api/favorite',
   Favorites = '/api/favorites',
 }
 
