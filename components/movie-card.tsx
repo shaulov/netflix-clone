@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import {BsFillPlayFill} from "react-icons/bs";
+import { BsFillPlayFill } from "react-icons/bs";
+import FavoriteButton from "./favorite-button";
 
 interface MovieCardProps {
   data: Record<string, any>
@@ -80,8 +81,9 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
               " 
               href="#"
             >
-              <BsFillPlayFill size={30} className="shrink-0 fill-black" />
+              <BsFillPlayFill className="shrink-0 fill-black" size={30} />
             </Link>
+            <FavoriteButton movieId={data?.id} />
           </div>
           <p className="mt-4 font-semibold text-green-400">
             New <span className="text-white">2023</span>
