@@ -1,5 +1,6 @@
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import useBillboard from "@/hooks/use-billboard";
+import PlayButton from "./play-button";
 
 function Billboard (): JSX.Element {
   const { data } = useBillboard();
@@ -20,14 +21,15 @@ function Billboard (): JSX.Element {
         <h3 className="h-full w-[50%] font-bold text-1xl md:text-5xl lg:text-6xl text-white drop-shadow-xl">{data?.title}</h3>
         <p className="w-[90%] md:w-[80%] lg:w-[50%] mt-3 md:mt-8 text-[8px] md:text-lg text-white drop-shadow-xl">{data?.description}</p>
         <div className="flex flex-row items-center gap-3 mt-3 md:mt-4">
+          <PlayButton movieId={data?.id} />
           <button
             className="
               flex
               flex-row
               items-center
               w-auto
-              py-1 md:py-2
               px-2 md:px-4
+              py-1 md:py-2
               font-semibold
               text-xs lg:text-lg
               text-white
@@ -38,7 +40,7 @@ function Billboard (): JSX.Element {
               hover:bg-opacity-20
             "
           >
-            <AiOutlineInfoCircle className="mr-1" />
+            <AiOutlineInfoCircle className="box-content mr-1 py-[6px]" size={13} />
             More Info
           </button>
         </div>
