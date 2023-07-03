@@ -14,7 +14,7 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
       <h3>
         <Link
           className="before:absolute before:top-0 before:left-0 before:z-10 before:w-full before:h-full" 
-          href=""
+          href={`/watch/${data.id}`}
         >
           <span className="sr-only">{data.title}</span>
         </Link>
@@ -79,7 +79,7 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
                 transition
                 hover:bg-neutral-300
               " 
-              href="#"
+              href={`/watch/${data.id}`}
             >
               <BsFillPlayFill className="shrink-0 fill-black" size={30} />
             </Link>
