@@ -37,6 +37,7 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
         src={src} 
         width={200} height={150} 
         alt={`Movie ${data.title}`}
+        priority={true}
       />
       <div
         className="
@@ -63,6 +64,7 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
           src={src} 
           width={200} height={150} 
           alt={`Movie ${data.title}`}
+          priority={false}
         />
         <div
           className="
