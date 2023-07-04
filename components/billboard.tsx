@@ -1,9 +1,16 @@
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import useBillboard from "@/hooks/use-billboard";
 import PlayButton from "./play-button";
+import { useCallback } from "react";
+import useInfoModal from "@/hooks/use-info-modal";
 
 function Billboard (): JSX.Element {
   const { data } = useBillboard();
+  const { openModal } = useInfoModal();
+
+  const handleOpenModal = useCallback(() => {
+    openModal(data?.id);
+  }, [openModal, data?.id]);
 
   return (
     <section className="relative h-[56.25vw]">
@@ -39,6 +46,7 @@ function Billboard (): JSX.Element {
               transition
               hover:bg-opacity-20
             "
+            onClick={handleOpenModal}
           >
             <AiOutlineInfoCircle className="box-content mr-1 py-[6px]" size={13} />
             More Info
