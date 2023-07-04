@@ -1,14 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsFillPlayFill } from "react-icons/bs";
+import { BiChevronDown } from "react-icons/bi"
 import FavoriteButton from "./favorite-button";
+import useInfoModal from "@/hooks/use-info-modal";
 
 interface MovieCardProps {
   data: Record<string, any>
 }
 
 function MovieCard ({ data }: MovieCardProps): JSX.Element {
+  const { openModal } = useInfoModal();
   const src = data.thumbnailUrl;
+
   return (
     <article className="relative col-span-1 group bg-zinc-900">
       <h3>
@@ -33,6 +37,7 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
         src={src} 
         width={200} height={150} 
         alt={`Movie ${data.title}`}
+        priority={true}
       />
       <div
         className="
@@ -59,6 +64,7 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
           src={src} 
           width={200} height={150} 
           alt={`Movie ${data.title}`}
+          priority={false}
         />
         <div
           className="
@@ -84,6 +90,19 @@ function MovieCard ({ data }: MovieCardProps): JSX.Element {
               <BsFillPlayFill className="shrink-0 fill-black" size={30} />
             </Link>
             <FavoriteButton movieId={data?.id} />
+            <button 
+              className="
+                flex justify-center items-center
+                w-6 h-6 lg:w-10 lg:h-10 ml-auto 
+                border-white border-2 rounded-full 
+                transition
+                group/item
+                hover:border-neutral-300
+              "
+              onClick={() => openModal(data?.id)}
+            >
+              <BiChevronDown className="group-hover/item:text-neutral-300" size={30} />
+            </button>
           </div>
           <p className="mt-4 font-semibold text-green-400">
             New <span className="text-white">2023</span>

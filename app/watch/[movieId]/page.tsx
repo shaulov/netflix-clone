@@ -38,6 +38,7 @@ function Watch () {
       </nav>
       <video 
         className="h-full w-full" 
+        poster={data?.thumbnailUrl}
         src={data?.videoUrl}
         autoPlay
         controls

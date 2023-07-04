@@ -9,6 +9,8 @@ import { AppRoute, AuthStatus } from '@/const';
 import Navbar from '@/components/navbar';
 import Billboard from '@/components/billboard';
 import MovieList from '@/components/movie-list';
+import InfoModal from '@/components/info-modal';
+import useInfoModal from '@/hooks/use-info-modal';
 
 export default function Home() {
   const session = useSession();
@@ -16,6 +18,7 @@ export default function Home() {
 
   const { data: movies = [] } = useMovieList();
   const { data: favoriteMovies = [] } = useFavorites();
+  const { isOpen, closeModal } = useInfoModal();
 
   useEffect(() => {
     if (session?.status === AuthStatus.NoAUTH) {
@@ -30,6 +33,7 @@ export default function Home() {
   if (session?.status === "authenticated") {
     return (
       <>
+        <InfoModal visible={isOpen} onClose={closeModal} />
         <Navbar />
         <Billboard />
         <div className="pb-40">
